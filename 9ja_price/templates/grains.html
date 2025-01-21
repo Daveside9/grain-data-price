@@ -3,62 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grain Prices</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        table {
-            border-collapse: collapse;
-            width: 90%;
-            margin: 20px auto;
-            background-color: #ffffff;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        h1 {
-            text-align: center;
-            color: #333333;
-            margin-top: 20px;
-        }
-    </style>
+    <title>Grains Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Dynamic Grain Prices</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Grain Type</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Quantity</th>
-                <th>Price (₦)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for grain in grains %}
+    <header>
+        <h1>Grains Data</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/grains">Grains Data</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Available Grain Prices</h2>
+        {% if grains %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Grain Type</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grain in grains %}
                 <tr>
                     <td>{{ grain['Grain Type'] }}</td>
-                    <td>{{ grain['Date'] }}</td>
                     <td>{{ grain['Location'] }}</td>
-                    <td>{{ grain['Quantity'] }}</td>
                     <td>{{ grain['Price'] }}</td>
+                    <td>{{ grain['Date'] }}</td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No grain data is available at the moment.</p>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Grain Data Price API. All rights reserved.</p>
+    </footer>
 </body>
 </html>

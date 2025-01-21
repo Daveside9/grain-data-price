@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import csv
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 # Utility function to read CSV data
 def read_csv(file_name):
@@ -18,7 +18,7 @@ def read_csv(file_name):
 
 @app.route('/')
 def welcome():
-    return "Welcome to the Grain Data Price API in Nigeria!"
+    return render_template('index.html')
 
 @app.route('/grains')
 def grains():
